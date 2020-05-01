@@ -6,8 +6,8 @@ const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./schema/typeDefs");
 const resolvers = require("./resolvers/resolvers");
 
-const port = 8000;
-const PORT = process.env.PORT || port;
+
+const PORT = process.env.PORT || 8000;
 const HOST = process.env.BASE_URL || "localhost";
 const baseURL = `http://${HOST}:${PORT}`;
 
