@@ -10,21 +10,18 @@ exports.seed = function (knex) {
                     cellPhone: "9143125729",
                     passwordHash: "test",
                     email: "charlie@test.com",
-                    role: 0,
                 },
                 {
                     firstName: "Jason",
                     cellPhone: "5515560079",
                     passwordHash: "test",
                     email: "charlie@test.com",
-                    role: 0,
                 },
                 {
                     firstName: "Test-User",
                     cellPhone: "5555555555",
                     passwordHash: "test",
                     email: "user@test.com",
-                    role: 1,
                 },
             ]);
         });

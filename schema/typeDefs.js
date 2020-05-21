@@ -7,29 +7,29 @@ module.exports = gql`
         getAllUsers: [User!]!
         getMenuItems(businessId: ID!): [MenuItem]
         getBusinessInfo(businessId: ID!): Business
+        token: String
     }
     type Mutation {
-        updateUser(
-            id: ID!
-            firstName: String
-            lastName: String
-            email: String
-        ): User
-        # createWorkHistory()
-        # updateWorkHistory
-        # createEducationHistory
-        # updateEducationHistory
-        # figure out mutations on skills
+        loginUser(cellPhone: String!, password: String!): UserLoginPayload
+        createUser(
+            firstName: String!
+            cellPhone: String!
+            password: String!
+        ): UserLoginPayload
+        createMenuItem(
+            businessId: ID!
+            itemName: String!
+            category: String!
+            description: String!
+            price: Float!
+            imageURL: String!
+        ): NewMenuItem!
+        updateUser(firstName: String, cellPhone: String, password: String): User
     }
-
     type User {
-        userId: ID!
         firstName: String
-        lastName: String
         cellPhone: String
-        email: String
-        passwordHash: String
-        role: Int
+        password: String
     }
     type Business {
         businessId: ID!
@@ -54,5 +54,13 @@ module.exports = gql`
         description: String
         price: Float
         soldOut: String
+    }
+    type UserLoginPayload {
+        firstName: String
+        token: String
+    }
+    type NewMenuItem {
+        itemId: ID!
+        message: String!
     }
 `;
