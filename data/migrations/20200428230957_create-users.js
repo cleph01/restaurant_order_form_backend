@@ -5,6 +5,7 @@ exports.up = function (knex) {
         table.text("cellPhone").notNullable().unique();
         table.text("passwordHash").notNullable();
         table.text("email");
+        table.timestamps(false, true);
     });
 };
 

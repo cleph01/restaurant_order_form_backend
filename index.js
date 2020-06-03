@@ -3,8 +3,8 @@ require("dotenv").config();
 const { ApolloServer } = require("apollo-server");
 
 // GraphQL Schema
-const typeDefs = require("./schema/typeDefs");
-const resolvers = require("./resolvers/resolvers");
+const typeDefs = require("./graphql/schema/index");
+const resolvers = require("./graphql/resolvers/index");
 
 const PORT = process.env.PORT || 8000;
 const HOST = process.env.BASE_URL || "localhost";

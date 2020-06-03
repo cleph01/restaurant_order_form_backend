@@ -1,10 +1,10 @@
 const bcrypt = require("bcryptjs");
 
-const secrets = require("../config/secrets.js");
+const secrets = require("../../config/secrets.js");
 
 const jwt = require("jsonwebtoken");
 
-const db = require("../data/knexConfig");
+const db = require("../../data/knexConfig");
 
 function generateToken(user) {
     const payload = {
@@ -29,37 +29,9 @@ module.exports = {
         getAllUsers: async (parent, _, context) => {
             return db("user");
         },
-        getMenuItems: async (parent, _, context) => {
-            return db("menuItem").where({ businessId: parent.businessId });
-        },
-        getBusinessInfo: async (parent, { businessId }, context) => {
-            return db("business").where({ businessId }).first();
-        },
-        token: (parent, args, context) => {
-            return context.token;
-        },
-    },
-    Business: {
-        menuItems(business, args, cxt) {
-            const raw_response = db("menuItem").where({
-                businessId: business.businessId,
-            });
-
-            //Holds list of categories
-            // let category_array = [];
-
-            // for (i = 0; i < raw_response.length; i++) {
-            //     // if (!category_array.includes(raw_response[i].category)) {
-            //     //     category_array.push(raw_response[i].category);
-            //     // }
-            //     category_array.push(raw_response[i].category);
-            // }
-
-            return db("menuItem").where({ businessId: business.businessId });
-        },
     },
     Mutation: {
-        createUser: async (parent, args, context) => {
+        addUser: async (parent, args, context) => {
             const passwordHash = bcrypt.hashSync(args.password, 9);
 
             const newUserData = {
@@ -124,35 +96,7 @@ module.exports = {
                 console.log(e);
             }
         },
-        createMenuItem: async (parent, args, context) => {
-            try {
-                const newItem = {
-                    businessId: args.businessId,
-                    itemName: args.itemName,
-                    category: args.category,
-                    description: args.description,
-                    price: args.price,
-                    imageURL: args.imageURL,
-                };
-                const [newItemId] = await db("menuitem").insert(newItem, [
-                    "id",
-                ]);
-
-                console.log(newItemId, "\n New Item Id");
-
-                return { itemId: newItemId, message: "Item Added" };
-            } catch (error) {
-                console.log(error);
-            }
-        },
+        
     },
-    // updateUser: async (_, args, context) => {
-    //     // console.log(args, "getUpdatedUser Body");
-
-    //     const updatedUser = await updateUser(context.token, args);
-
-    //     // console.log(updatedUser, "Updated User Holy Grail =====");
-
-    //     return { userInfo: JSON.stringify(updatedUser) };
-    // },
+    
 };

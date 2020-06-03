@@ -12,6 +12,8 @@ exports.up = function (knex) {
         table.decimal("price").notNullable();
         table.text("soldOut").defaultTo("n");
         table.text("imageURL");
+        table.text("imageName");
+        table.timestamps(false, true);
     });
 };
 

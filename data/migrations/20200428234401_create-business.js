@@ -13,6 +13,7 @@ exports.up = function (knex) {
         table.text("zipCode").notNullable();
         table.text("latitude").notNullable();
         table.text("longitude").notNullable();
+        table.timestamps(false, true);
     });
 };
 
